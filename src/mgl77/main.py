@@ -16,6 +16,7 @@ import re
 from mgl77.fetch import fetch
 from mgl77.game_data import NavigationColumn, AllGameData
 from mgl77.time_keeper import time_keep
+from mgl77.config import EXHIBITION_NAME
 
 import time
 import win32gui, win32process, win32con
@@ -51,7 +52,7 @@ def get_hwnds_from_pid(pid):
 
 
 def main(page: ft.Page):
-    page.title = "Mini game launcher"
+    page.title = EXHIBITION_NAME
 
     img_controller: Optional[ft.Container] = None
     img_part: Optional[ft.Container] = None
@@ -66,7 +67,7 @@ def main(page: ft.Page):
                 "/",
                 [
                     ft.Text(
-                        "AGC展ミニゲーム集", size=100, text_align=ft.TextAlign.CENTER
+                        EXHIBITION_NAME, size=100, text_align=ft.TextAlign.CENTER
                     ),
                     ft.ElevatedButton(
                         content=ft.Text("はじめる", size=36),

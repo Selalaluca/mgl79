@@ -4,11 +4,17 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+from mgl77.config import EXECUTABLE_NAME
+
 # exeとして実行されている場合、自分自身のフォルダを基準にする
 if getattr(sys, "frozen", False):
     os.chdir(Path(sys.executable).parent)
 
-MAIN_EXE = str(Path(sys.executable).parent.parent / "mgl79.exe" / "mgl79.exe")
+MAIN_EXE = str(
+    Path(sys.executable).parent.parent
+    / EXECUTABLE_NAME
+    / f"{EXECUTABLE_NAME}.exe"
+)
 
 
 def main():

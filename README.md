@@ -1,4 +1,4 @@
-# mgl79
+# mgl77
 
 77回文化祭で使用した（78, 79文化祭でも一部を改修して利用）ミニゲームランチャーです。
 
@@ -21,16 +21,20 @@ GUIなどはFletというフレームワークで制作されています。Flet
 
 ```commandline
 uv sync
-uv run pyinstaller .\mgl79.exe.spec
-uv run pyinstaller .\mgl79-loop.exe.spec
+uv run pyinstaller .\launcher.spec
+uv run pyinstaller .\loop.spec
 ```
 - `--hidden-import`などのビルド設定はspecファイルに記述済み
-- exeの名前を変えたい場合は、2つのspecファイルの`name`と`back_loop.py`の`MAIN_EXE`の値を同じ名前に変更する（`--name`は不要）
-- ランチャーのタイトル画面の展示名を変えたいときは`main.py`の67行目を書き換え
-- すでに存在するけど上書きする？みたいな警告が出た場合はyを押す
-- かなり時間かかる
-- 終わったらdist/かbuild/とかに2つそれぞれのexeとinternalディレクトリが生成される　mglXX.exeがランチャー本体で、mglXX-loopはmglXX.exeを(落とされても)実行し続けるプロセスになっていて、展示ではloopのほうを実行する
-- internalの中身はexeが依存するPythonパッケージで、exeと同じディレクトリに必ず置く
+- 展示名やexe名を変更する場合は、`src/mgl77/config.py`の次の値だけを変更する
+  - `EXHIBITION_NAME`: タイトル画面とウィンドウに表示する展示名
+  - `EXECUTABLE_NAME`: ランチャー本体のexe名（`.exe`は付けない）
+  - loop用のexe名は`EXECUTABLE_NAME`から自動的に決まる
+- `EXECUTABLE_NAME`を変更しても、specファイルや`back_loop.py`、CIの変更は不要
+- すでに出力先が存在する場合は、上書き確認で`y`を押す
+- ビルドにはかなり時間がかかる
+- ビルド後は、`dist/<EXECUTABLE_NAME>/`と`dist/<EXECUTABLE_NAME>-loop/`が生成される
+  - 前者のexeがランチャー本体、後者が本体を再起動し続けるloop
+  - 各フォルダ内のexeと`_internal`ディレクトリは同じ場所に置いたままにする
 - ゲームデータはexeと同じディレクトリのassets/games下に後述するフォーマットで置く。~~ゲームデータはgitで自動的にfetchされる仕様になっているので手動で置いたり更新する必要はない~~ `main.py`の81行目`fetch()`をコメントアウトすることによって無効化中
   - ~~fetchしてくるgitリポジトリは今は `https://github.com/nahco314/agc77-minigames` になっている(コードの中にハードコートされてます)~~
 

@@ -1,0 +1,5 @@
+"""展示ごとに変更する設定。"""
+
+EXHIBITION_NAME = "AGC展ミニゲーム集"
+EXECUTABLE_NAME = "mgl79"
+LOOP_EXECUTABLE_NAME = f"{EXECUTABLE_NAME}-loop"
