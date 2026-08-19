@@ -20,11 +20,12 @@ GUIなどはFletというフレームワークで制作されています。Flet
 ## ビルド(exe生成)
 
 ```commandline
-uv add --dev pyinstaller
-uv run pyinstaller ./src/mgl77/main.py --name mgl79.exe --hidden-import win32gui --hidden-import win32con --hidden-import win32api --hidden-import pyautogui
-uv run pyinstaller ./src/mgl77/back_loop.py --name mgl79-loop.exe
+uv sync
+uv run pyinstaller .\mgl79.exe.spec
+uv run pyinstaller .\mgl79-loop.exe.spec
 ```
-- exeの名前を変えたい場合は、`--name mglXX.exe`, `mglXX-loop.exe`の`XX`の部分を変えたうえで、`back_loop.py`の`MAIN.EXE`の値を書き換え
+- `--hidden-import`などのビルド設定はspecファイルに記述済み
+- exeの名前を変えたい場合は、2つのspecファイルの`name`と`back_loop.py`の`MAIN_EXE`の値を同じ名前に変更する（`--name`は不要）
 - ランチャーのタイトル画面の展示名を変えたいときは`main.py`の67行目を書き換え
 - すでに存在するけど上書きする？みたいな警告が出た場合はyを押す
 - かなり時間かかる

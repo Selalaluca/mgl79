@@ -28,7 +28,6 @@ managed = true
 [dependency-groups]
 dev = [
     "pyinstaller>=6.6.0",
-    "ruff>=0.15.12",
 ]
 
 [tool.hatch.metadata]
