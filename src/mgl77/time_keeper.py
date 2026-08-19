@@ -21,10 +21,11 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-WARNING_SECS = 5*60
+WARNING_SECS = 5 * 60
 KILL_SECS = 7 * 60
 
 game_process: Optional[subprocess.Popen] = None
+
 
 def time_keep(kill_window_event: Event, end_thread_event: Event, kill_func):
     done_warning = False
@@ -40,18 +41,23 @@ def time_keep(kill_window_event: Event, end_thread_event: Event, kill_func):
         if (not done_warning) and time.time() - start > WARNING_SECS:
             root = tk.Tk()
             root.withdraw()  # メインウィンドウを表示しない
-            root.attributes('-topmost', True)  # ウィンドウを最前面にする
+            root.attributes("-topmost", True)  # ウィンドウを最前面にする
 
-            messagebox.showwarning("警告", "そろそろ交代してください！ご協力をお願いします。")
+            messagebox.showwarning(
+                "警告", "そろそろ交代してください！ご協力をお願いします。"
+            )
 
             done_warning = True
 
         if (not done_kill) and time.time() - start > KILL_SECS:
             root = tk.Tk()
             root.withdraw()
-            root.attributes('-topmost', True)
+            root.attributes("-topmost", True)
 
-            messagebox.showerror("警告", "長く遊びすぎなので、強制的に終了します。展示を一回出てからまた来てね")
+            messagebox.showerror(
+                "警告",
+                "長く遊びすぎなので、強制的に終了します。展示を一回出てからまた来てね",
+            )
 
             kill_window_event.set()
             done_kill = True

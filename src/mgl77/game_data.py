@@ -43,7 +43,9 @@ def get_games(games_path: Path) -> list[GameData]:
             dct = tomllib.load(f)
             dct["screen_shot"] = screen_shot
             dct["index"] = i
-            dct["game_exe"] = p / f"{dct["game_exe_name"]}.exe" if "game_exe_name" in dct else None
+            dct["game_exe"] = (
+                p / f"{dct['game_exe_name']}.exe" if "game_exe_name" in dct else None
+            )
             try:
                 game_data = GameData(**dct)
             except ValidationError:
@@ -60,7 +62,6 @@ def get_games(games_path: Path) -> list[GameData]:
 class AllGameData:
     def __init__(self):
         self.control_groups = get_games(Path("assets/games"))
-        self.selected_control_group = self.control_groups[0]
 
 
 class NavigationItem(ft.Container):

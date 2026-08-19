@@ -20,7 +20,9 @@ def _fetch():
 
     index_file = local_repo.index_path()
     tree = local_repo[b"HEAD"].tree
-    index.build_index_from_tree(local_repo.path, index_file, local_repo.object_store, tree)
+    index.build_index_from_tree(
+        local_repo.path, index_file, local_repo.object_store, tree
+    )
 
 
 def fetch():
